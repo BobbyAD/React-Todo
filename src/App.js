@@ -1,8 +1,9 @@
 import React from 'react';
+import TodoList from './components/TodoComponents/TodoList';
 
 const defaultTasks = [
     {
-        task: 'Example Task',
+        description: 'Example Task',
         id: 0,
         completed: false
     }
@@ -44,12 +45,7 @@ class App extends React.Component {
         return (
             <div>
                 <h2>Welcome to your Todo App!</h2>
-
-                {/* <div className="task-list">
-                    {this.state.tasksOnState.map(task => (
-                        
-                    ))}
-                </div> */}
+                <TodoList tasks={this.state.tasksOnState} />
             </div>
         );
     }
