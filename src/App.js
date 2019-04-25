@@ -1,10 +1,16 @@
 import React from 'react';
 import TodoList from './components/TodoComponents/TodoList';
+import TodoForm from './components/TodoComponents/TodoForm';
 
 const defaultTasks = [
     {
         description: 'Example Task',
         id: 0,
+        completed: false
+    },
+    {
+        description: 'Example Task2',
+        id: 1,
         completed: false
     }
 ];
@@ -19,7 +25,7 @@ class App extends React.Component {
             tasksOnState: defaultTasks,
             task: {
                 description: '',
-                id: 0,
+                id: '',
                 completed: false
             }
         }
@@ -29,15 +35,26 @@ class App extends React.Component {
         this.setState({
             task: {
                 ...this.state.task,
-                [event.target.description]: event.target.value
+                [event.target.name]: event.target.value
             }
-        })
+        });
     }
 
     addTask = event => {
         event.preventDefault();
+        console.log(this.state.tasksOnState);
+        const newTask = {
+            description: this.state.task.description,
+            id: Date.now(),
+            completed: false
+        }
         this.setState({
-            tasksOnState: [...this.state.tasksOnState, this.state.task]
+            tasksOnState: [...this.state.tasksOnState, newTask],
+            task: {
+                description: '',
+                id: '',
+                completed: false
+            }
         })
     }
 
@@ -46,6 +63,12 @@ class App extends React.Component {
             <div>
                 <h2>Welcome to your Todo App!</h2>
                 <TodoList tasks={this.state.tasksOnState} />
+                <TodoForm 
+                    addDescription = {this.addTask}
+                    handleDescriptionChange = {this.handleChanges}
+                    addTodo = {this.addTask}
+                    desc = {this.state.task.description}
+                />
             </div>
         );
     }
