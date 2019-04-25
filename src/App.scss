@@ -1,0 +1,52 @@
+.todo-app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+    margin: 10px auto;
+    padding: 10px;
+    border: 2px solid salmon;
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    background: cadetblue;
+    color: azure;
+    border-radius: 5px;
+    h2 {
+        font-size: 20px;
+        font-weight: 600;
+        padding: 0 5px 4px;
+        border-bottom: 2px solid azure;
+    }
+    .task-list {
+        padding: 15px;
+        line-height: 30px;
+    }
+    .todo-form {
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            input {
+                border: 2px solid salmon;
+                color: cadetblue;
+                background-color: azure;
+                text-align: center;
+                padding: 5px;
+                margin-bottom: 10px;
+            }
+            input::placeholder {
+                color: cadetblue;
+                opacity: .5;
+            }
+            button {
+                background: azure;
+                font-weight: 600;
+                color: salmon;
+                border: 2px solid salmon;
+                padding: 5px;
+                margin: 5px;
+            }
+        }
+    }
+}

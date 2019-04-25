@@ -1,6 +1,8 @@
 import React from 'react';
 import TodoList from './components/TodoComponents/TodoList';
 import TodoForm from './components/TodoComponents/TodoForm';
+import './reset.scss';
+import './App.scss';
 
 const defaultTasks = [
     {
@@ -77,7 +79,7 @@ class App extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="todo-app">
                 <h2>Welcome to your Todo App!</h2>
                 <TodoList 
                     tasks={this.state.tasksOnState} 
