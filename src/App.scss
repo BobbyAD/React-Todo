@@ -21,6 +21,9 @@
     .task-list {
         padding: 15px;
         line-height: 30px;
+        p {
+            cursor: pointer;
+        }
     }
     .todo-form {
         form {
