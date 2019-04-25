@@ -4,7 +4,20 @@ import TodoForm from './components/TodoComponents/TodoForm';
 import './reset.scss';
 import './App.scss';
 
-const defaultTasks = [
+// const defaultTasks = [
+//     {
+//         description: 'Example Task',
+//         id: 0,
+//         completed: false
+//     },
+//     {
+//         description: 'Example Task2',
+//         id: 1,
+//         completed: false
+//     }
+// ];
+
+var passedTasks = [
     {
         description: 'Example Task',
         id: 0,
@@ -16,6 +29,15 @@ const defaultTasks = [
         completed: false
     }
 ];
+
+console.log(localStorage.getItem('tasks'));
+
+if (!localStorage.getItem('tasks')) {
+    localStorage.setItem('tasks', JSON.stringify(passedTasks));
+}
+console.log(localStorage.getItem('tasks'));
+
+var defaultTasks = JSON.parse(localStorage.getItem('tasks'));
 
 class App extends React.Component {
     // you will need a place to store your state in this component.
@@ -44,12 +66,13 @@ class App extends React.Component {
 
     addTask = event => {
         event.preventDefault();
-        console.log(this.state.tasksOnState);
+        // console.log(this.state.tasksOnState);
         const newTask = {
             description: this.state.task.description,
             id: Date.now(),
             completed: false
         }
+        localStorage.setItem('tasks', JSON.stringify([...this.state.tasksOnState, newTask]));
         this.setState({
             tasksOnState: [...this.state.tasksOnState, newTask],
             task: {
@@ -70,10 +93,22 @@ class App extends React.Component {
 
     clearCompleted = event => {
         event.preventDefault();
+        localStorage.setItem('tasks', JSON.stringify(
+            this.state.tasksOnState.filter(element => 
+            element.completed === true ? false : element
+        )));
         this.setState({
             tasksOnState: this.state.tasksOnState.filter(element => 
                     element.completed === true ? false : element
                 )
+        })
+    }
+
+    resetStorage = event => {
+        event.preventDefault();
+        localStorage.removeItem('tasks');
+        this.setState({
+            tasksOnState: passedTasks
         })
     }
 
@@ -91,6 +126,7 @@ class App extends React.Component {
                     addTodo = {this.addTask}
                     desc = {this.state.task.description}
                     clearCompleted = {this.clearCompleted}
+                    resetStorage = {this.resetStorage}
                 />
             </div>
         );
